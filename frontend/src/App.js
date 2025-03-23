@@ -5,7 +5,7 @@ function App() {
   const [requester, setRequester] = useState("");
   const [promises, setPromises] = useState([]);
 
-  const API_URL = "https://promisepro.onrender.com";
+  const API_URL = "https://promisepro.onrender.com"; // ← 이 부분은 실제 배포된 주소로 수정해줘!
 
   // 약속 목록 불러오기
   useEffect(() => {
@@ -55,6 +55,12 @@ function App() {
 
   return (
     <div style={{ padding: "2rem", fontFamily: "Arial" }}>
+      {/* 상단 개발자 정보 */}
+      <div style={{ fontSize: "0.9rem", color: "gray", marginBottom: "2rem", textAlign: "center" }}>
+        <p>개발자 : ㅈ갈민혁</p>
+        <p>버그 신고 및 건의 사항 : @jeg0l</p>
+      </div>
+
       <h2>📆 약속 입력하기</h2>
 
       <input
@@ -109,12 +115,6 @@ function App() {
           </li>
         ))}
       </ul>
-
-      <hr style={{ marginTop: "3rem" }} />
-      <div style={{ fontSize: "0.9rem", color: "gray", textAlign: "center", marginTop: "1rem" }}>
-       <p>개발자 : ㅈ갈민혁</p>
-       <p>버그 신고 및 건의 사항 : @jeg0l</p>
-      </div>
     </div>
   );
 }
