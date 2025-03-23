@@ -10,7 +10,7 @@ app.use(cors());
 app.use(express.json());
 
 // MongoDB 연결
-mongoose.connect('mongodb://127.0.0.1:27017/promises', {
+mongoose.connect('mongodb+srv://jegal:1067@cluster0.pxa8f.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 }).then(() => {
@@ -21,9 +21,11 @@ mongoose.connect('mongodb://127.0.0.1:27017/promises', {
 
 // 약속 스키마 생성
 const promiseSchema = new mongoose.Schema({
-  text: String,
-  accepted: Boolean,
-});
+    text: String,
+    accepted: Boolean,
+    requester: String,
+    responder: String,
+  });
 
 const PromiseModel = mongoose.model('Promise', promiseSchema);
 
@@ -35,22 +37,30 @@ app.get('/promises', async (req, res) => {
 
 // 약속 등록 API
 app.post('/promises', async (req, res) => {
-  const { text } = req.body;
-  const newPromise = new PromiseModel({ text, accepted: false });
+    const { text, requester } = req.body;
+    const newPromise = new PromiseModel({
+      text,
+      requester,
+      accepted: false,
+      responder: "",
+    });
   await newPromise.save();
   res.json(newPromise);
 });
 
 // 약속 수락 API
 app.patch('/promises/:id/accept', async (req, res) => {
-  const { id } = req.params;
-  const updated = await PromiseModel.findByIdAndUpdate(
-    id,
-    { accepted: true },
-    { new: true }
-  );
-  res.json(updated);
-});
+    const { id } = req.params;
+    const { responder } = req.body;
+  
+    const updated = await PromiseModel.findByIdAndUpdate(
+      id,
+      { accepted: true, responder },
+      { new: true }
+    );
+    res.json(updated);
+  });
+  
 
 // 서버 실행
 app.listen(PORT, () => {
