@@ -109,6 +109,12 @@ function App() {
           </li>
         ))}
       </ul>
+
+      <hr style={{ marginTop: "3rem" }} />
+      <div style={{ fontSize: "0.9rem", color: "gray", textAlign: "center", marginTop: "1rem" }}>
+       <p>개발자 : ㅈ갈민혁</p>
+       <p>버그 신고 및 건의 사항 : @jeg0l</p>
+      </div>
     </div>
   );
 }
