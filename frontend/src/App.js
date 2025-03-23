@@ -5,7 +5,7 @@ function App() {
   const [requester, setRequester] = useState("");
   const [promises, setPromises] = useState([]);
 
-  const API_URL = "http://localhost:4000";
+  const API_URL = "https://promisepro.onrender.com";
 
   // 약속 목록 불러오기
   useEffect(() => {
